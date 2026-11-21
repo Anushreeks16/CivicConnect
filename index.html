@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#16834b">
+  <title>CivicConnect | Your City, Your Voice</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="#" onclick="showPage('citizen');return false" aria-label="CivicConnect home">
+      <span class="brand-mark">C<span>+</span></span>
+      <span><strong>CivicConnect</strong><small>Your City, Your Voice</small></span>
+    </a>
+    <nav class="nav-actions" aria-label="Main navigation">
+      <button class="nav-link active" id="citizenNav" onclick="showPage('citizen')">Report an issue</button>
+      <button class="nav-link" id="trackNav" onclick="showPage('track')">Track complaint</button>
+      <button class="nav-link admin-link" id="adminNav" onclick="showPage('admin')">Admin portal ↗</button>
+    </nav>
+  </header>
+
+  <main>
+    <section id="citizenPage" class="page">
+      <section class="hero">
+        <div class="hero-copy">
+          <span class="eyebrow"><span class="pulse"></span> A better city starts with you</span>
+          <h1>See a problem?<br><em>Let's fix it together.</em></h1>
+          <p>Report local issues in a few simple steps. Share a photo, tell us what's wrong, and follow your complaint until it's resolved.</p>
+          <button class="primary-btn" onclick="document.getElementById('categories').scrollIntoView({behavior:'smooth'})">Report a problem <span>→</span></button>
+          <div class="trust-note"><span class="check">✓</span> Easy to use &nbsp;·&nbsp; Trackable complaints &nbsp;·&nbsp; Community first</div>
+        </div>
+        <div class="hero-art" aria-hidden="true">
+          <div class="art-sun"></div><div class="art-cloud cloud-one"></div><div class="art-cloud cloud-two"></div>
+          <div class="art-city">
+            <div class="building b1"><i></i><i></i><i></i></div>
+            <div class="building b2"><i></i><i></i><i></i><i></i></div>
+            <div class="building b3"><i></i><i></i><i></i></div>
+            <div class="tree"><b></b><span></span></div><div class="tree t2"><b></b><span></span></div>
+          </div>
+          <div class="art-ground"></div>
+          <div class="art-label"><span>✦</span> Small actions. Better neighbourhoods.</div>
+        </div>
+      </section>
+
+      <section class="section categories-section" id="categories">
+        <div class="section-heading">
+          <div><span class="section-kicker">HOW CAN WE HELP?</span><h2>Choose a complaint category</h2><p>Select the area that best matches the problem you noticed.</p></div>
+          <span class="step-pill">STEP 1 OF 2</span>
+        </div>
+        <div class="category-grid" id="categoryGrid">
+          <button class="category-card" onclick="chooseCategory('Roads','road')"><span class="category-icon">🛣️</span><strong>Roads</strong><small>Potholes, damaged roads</small><span class="card-arrow">↗</span></button>
+          <button class="category-card" onclick="chooseCategory('Waste Management','waste')"><span class="category-icon">♻️</span><strong>Waste management</strong><small>Garbage, missed collection</small><span class="card-arrow">↗</span></button>
+          <button class="category-card" onclick="chooseCategory('Water Supply','water')"><span class="category-icon">💧</span><strong>Water supply</strong><small>Leaks, no water, quality</small><span class="card-arrow">↗</span></button>
+          <button class="category-card" onclick="chooseCategory('Electricity','electricity')"><span class="category-icon">💡</span><strong>Electricity</strong><small>Streetlights, exposed wires</small><span class="card-arrow">↗</span></button>
+          <button class="category-card" onclick="chooseCategory('Trees & Parks','trees')"><span class="category-icon">🌳</span><strong>Trees & parks</strong><small>Fallen trees, park issues</small><span class="card-arrow">↗</span></button>
+          <button class="category-card" onclick="chooseCategory('Drainage','drainage')"><span class="category-icon">🚰</span><strong>Drainage</strong><small>Blocked drains, sewage</small><span class="card-arrow">↗</span></button>
+        </div>
+      </section>
+
+      <section class="section report-section" id="reportSection">
+        <div class="section-heading">
+          <div><span class="section-kicker">TELL US MORE</span><h2>Submit your complaint</h2><p>Share a few details so the right team can look into it.</p></div>
+          <span class="step-pill">STEP 2 OF 2</span>
+        </div>
+        <form id="complaintForm" class="form-card">
+          <div class="selected-category"><span id="selectedIcon">🛣️</span><div><small>SELECTED CATEGORY</small><strong id="selectedCategory">Roads</strong></div><button type="button" class="text-btn" onclick="document.getElementById('categories').scrollIntoView({behavior:'smooth'})">Change</button></div>
+          <input type="hidden" id="categoryInput" value="Roads">
+          <div class="form-grid">
+            <label class="field full"><span>What is the problem? <b>*</b></span><textarea id="description" required minlength="10" rows="4" placeholder="Example: There is a large pothole near the bus stop. It is difficult for vehicles to pass."></textarea><small>Use simple words to explain what happened.</small></label>
+            <label class="field"><span>Area / locality <b>*</b></span><input id="area" required placeholder="Example: Gandhi Nagar"></label>
+            <label class="field"><span>Street or nearby landmark</span><input id="landmark" placeholder="Example: Near City Bus Stop"></label>
+            <label class="field full"><span>Upload a photo <b>*</b></span>
+              <label class="upload-box" for="photo"><span class="upload-icon">＋</span><strong>Choose a photo</strong><small>Take a picture or select one from your phone</small><input id="photo" type="file" accept="image/*" required></label>
+              <img id="imagePreview" class="image-preview hidden" alt="Selected complaint photo">
+            </label>
+            <label class="field"><span>Your name <b>*</b></span><input id="citizenName" required placeholder="Enter your name"></label>
+            <label class="field"><span>Mobile number <b>*</b></span><input id="phone" required inputmode="numeric" pattern="[0-9]{10}" maxlength="10" placeholder="10-digit mobile number"></label>
+          </div>
+          <label class="consent"><input type="checkbox" required> <span>I confirm that the information provided is correct.</span></label>
+          <button class="primary-btn submit-btn" type="submit">Submit complaint <span>→</span></button>
+          <p class="form-footnote">Your contact details are used only for complaint updates in this demo.</p>
+        </form>
+      </section>
+      <section class="bottom-help"><span class="help-icon">?</span><div><strong>Need help?</strong><p>Ask someone you trust to help you fill in this form. Make sure the photo clearly shows the problem.</p></div></section>
+    </section>
+
+    <section id="trackPage" class="page hidden">
+      <div class="inner-hero"><span class="section-kicker">COMPLAINT STATUS</span><h1>Track your complaint</h1><p>Enter the ticket ID you received after submitting your complaint.</p></div>
+      <div class="track-card"><label class="field"><span>Complaint ticket ID</span><input id="trackId" placeholder="Example: CIV-2026-0001"></label><button class="primary-btn" onclick="trackComplaint()">Find complaint →</button><div id="trackResult" class="track-result"></div></div>
+    </section>
+
+    <section id="adminPage" class="page hidden">
+      <div class="admin-shell">
+        <aside class="admin-sidebar">
+          <div class="admin-brand"><span class="brand-mark">C<span>+</span></span><div><strong>CivicConnect</strong><small>ADMIN PORTAL</small></div></div>
+          <div class="side-label">WORKSPACE</div>
+          <button class="side-item selected">▦ &nbsp; Overview</button>
+          <button class="side-item" onclick="document.getElementById('complaintsTable').scrollIntoView({behavior:'smooth'})">▤ &nbsp; All complaints</button>
+          <div class="sidebar-note"><span>ⓘ</span><p><strong>Demo admin view</strong><br>Complaints submitted in this browser appear here.</p></div>
+          <button class="side-item exit" onclick="showPage('citizen')">← &nbsp; Back to citizen site</button>
+        </aside>
+        <div class="admin-main">
+          <div class="admin-top"><div><span class="section-kicker">MUNICIPAL CONTROL CENTRE</span><h1>Good day, Admin 👋</h1><p>Here is what's happening in your city.</p></div><span class="admin-date" id="todayDate"></span></div>
+          <div class="stats-grid">
+            <div class="stat-card"><span class="stat-icon green">▤</span><small>Total complaints</small><strong id="totalCount">0</strong><em>All reports received</em></div>
+            <div class="stat-card"><span class="stat-icon orange">◷</span><small>Pending review</small><strong id="pendingCount">0</strong><em>Need attention</em></div>
+            <div class="stat-card"><span class="stat-icon blue">⚙</span><small>In progress</small><strong id="progressCount">0</strong><em>Work is underway</em></div>
+            <div class="stat-card"><span class="stat-icon mint">✓</span><small>Resolved</small><strong id="resolvedCount">0</strong><em>Marked as complete</em></div>
+          </div>
+          <div class="priority-banner"><span class="priority-symbol">!</span><div><strong>Review high-priority complaints first</strong><p>Check critical and high-severity issues, especially those that may affect public safety.</p></div></div>
+          <div class="table-heading" id="complaintsTable"><div><h2>Recent complaints</h2><p>Review reports and update their progress.</p></div><button class="outline-btn" onclick="renderAdmin()">↻ Refresh</button></div>
+          <div class="filters">
+            <input id="adminSearch" placeholder="Search ticket, area or category..." oninput="renderAdmin()">
+            <select id="statusFilter" onchange="renderAdmin()"><option value="All">All statuses</option><option>Pending</option><option>In Progress</option><option>Resolved</option></select>
+            <select id="severityFilter" onchange="renderAdmin()"><option value="All">All priorities</option><option>Critical</option><option>High</option><option>Medium</option><option>Low</option></select>
+          </div>
+          <div class="complaint-list" id="adminComplaints"></div>
+          <p class="admin-disclaimer">Prototype note: this demo stores complaints in this browser only. Connect a secure backend and database before real public use.</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer><a class="brand footer-brand" href="#" onclick="showPage('citizen');return false"><span class="brand-mark">C<span>+</span></span><span><strong>CivicConnect</strong><small>Your City, Your Voice</small></span></a><p>Working together for cleaner, safer and better neighbourhoods.</p><small>© 2026 CivicConnect · Student project prototype</small></footer>
+
+  <div id="successModal" class="modal hidden" role="dialog" aria-modal="true" aria-labelledby="successTitle">
+    <div class="modal-card"><div class="success-check">✓</div><span class="section-kicker">COMPLAINT RECEIVED</span><h2 id="successTitle">Thank you for speaking up!</h2><p>Your complaint has been saved in this demo. Keep your ticket ID to check its status.</p><div class="ticket-box"><small>YOUR TICKET ID</small><strong id="newTicketId"></strong><button onclick="copyTicket()">Copy ID</button></div><button class="primary-btn" onclick="closeModal()">Done</button></div>
+  </div>
+  <script src="app.js"></script>
+</body>
+</html>
